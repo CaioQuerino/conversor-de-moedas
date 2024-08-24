@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    --font: "Inter", system-ui, sans-serif;
+
+    --fs-header: 1.2rem;
+    --line-height-header: 2rem;
+    --fw-header: bold;
+
+    --fs-button: .875rem;
+    --line-height-button: 1.125rem;
+    --fw-button: 600;
+
+
+    --fs-body: .875rem;
+    --line-height-body: 1.125rem;
+    --fw-body: 400;
+
+    --fs-label: .625rem;
+    --line-height-label: .875rem;
+    --fw-label: 400;
+
+
+}
+
+@media (width < 80em) {
+    :root {
+        --font-header: var(--fw-header) var(--font)/var(--line-height-header);
+        --font-button: var(--fw-button) var(--font)/var(--line-height-button);
+     --font-body: var(--fw-body) var(--font)/var(--line-height-body);
+        --font-label: var(--fw-label) var(--font)/var(--line-height-label);
+    }
+}
+
+@media (width >= 80em) {
+    :root {
+        --fs-header: 2rem;
+        --line-height-header: 3rem;
+    
+        --fs-button: 1rem;
+        --line-height-button: 1.25rem;
+    
+        --fs-body: 1rem;
+        --line-height-body: 1.25rem;
+    
+        --fs-label: .75rem;
+        --line-height-label: 1rem;
+    }
+}
+
