@@ -125,8 +125,6 @@ select,input {
 body {
     font: var(--fw-body) var(--fs-body)/var(--line-height-body) var(--font-Inter);
     background: url("../assets/img/Background.svg") center;
-    display: grid;
-    align-items: center;
 }
 
 label {
@@ -166,13 +164,17 @@ img {
 .container {
     width: 33em;
     display: grid;
-    text-align: left;
+    justify-items: center;
     justify-content: center;
     margin: 0 auto;
     background-color: var(--blue-300);
     padding: 3.5em 4em;
     border-radius: 1.5rem;
-    margin-top: 3.125em;
+
+    width: 480px;
+    border-radius: 1.5rem;
+
+    border: 1px solid #2f3279;
 }
 
 .converter {
@@ -187,4 +189,32 @@ img {
     .container {
         width: fit-content;
     }
+}
+
+footer {
+    display: none;
+}
+
+.on {
+    display: block;
+    background-color: var(--blue-400);
+    text-align: center;
+    margin-top: 1.25rem;
+    gap: .8rem;
+    padding: 2em 4em;
+    border-radius: .5rem;
+
+    & span {
+        color: var(--blue-800);
+    }
+
+    & h1 {
+        color: var(--white);
+    }
+}
+
+#menssage {
+    display: block;
+    text-align: center;
+    color: brown;
 }

@@ -8,55 +8,71 @@ const CNY = 0.67;
 const form = document.querySelector("form");
 const value = document.getElementById("value");
 const currency = document.getElementById("currency");
+const footer = document.querySelector("footer");
+
+function menssageValid() {
+    document.getElementById("menssage").innerHTML = "";
+}
 
 value.addEventListener("input", () => {
-    const regex = /\D+/g;
-    value.value = value.value.replace(regex, "");
-    console.log(value.value);
+        const regex = /\D+/g;
+        value.value = value.value.replace(regex, "");
+        console.log(value.value);    
 });
 
 form.onsubmit = (event) => {
-    event.preventDefault();
-    console.log(currency.value);
+    event.preventDefault()
 
-    switch (currency.value) {
-        case "USD":
-            convertCurrency(Number(value.value), USD, "US$");
-            break;
-        case "EUR":
-            convertCurrency(Number(value.value), EUR, "€");
-            break;
-        case "GBP":
-            convertCurrency(Number(value.value), GBP, "£");
-            break;
-        case "JPY":
-            convertCurrency(Number(value.value), JPY, "¥");
-            break;
-        case "ARS":
-            convertCurrency(Number(value.value), ARS, "$");
-            break;
-        case "CNY":
-            convertCurrency(Number(value.value), CNY, "¥");
-            break;
-        default:
-            console.log("Selecione uma moeda válida.");
-            break;
+        switch (currency.value) {
+            case "USD":
+                convertCurrency(Number(value.value), USD, "US$");
+                menssageValid()
+                break;
+            case "EUR":
+                convertCurrency(Number(value.value), EUR, "€");
+                menssageValid()
+                break;
+            case "GBP":
+                convertCurrency(Number(value.value), GBP, "£");
+                menssageValid()
+                break;
+            case "JPY":
+                convertCurrency(Number(value.value), JPY, "¥");
+                menssageValid()
+                break;
+            case "ARS":
+                convertCurrency(Number(value.value), ARS, "$");
+                menssageValid()
+                break;
+            case "CNY":
+                convertCurrency(Number(value.value), CNY, "¥");
+                menssageValid()
+                break;
+            default:
+                document.getElementById("menssage").innerHTML = "Selecione uma moeda valida";
+                break;
     }
 };
 
 function convertCurrency(value, price, symbol) {
-    const convertedValue = value * price;
-    console.log(`Valor convertido: ${symbol}${convertedValue.toFixed(2)}`);
+    try {
+        let convertedValue = value * price;
+        convertedValue = formatCurrencyBRL(convertedValue).replace("R$", "");
+        console.log(`Valor convertido: ${symbol}${convertedValue}`);
 
+        document.getElementById("description").innerText = `${symbol} 1 = ${formatCurrencyBRL(price)}`;
+        document.getElementById("result").innerText = `${convertedValue} Reais`;
 
-    document.getElementById("description").innerText = `${symbol} 1 = ${formatCurrencyBRL(price)}`;
-
-    document.getElementById("result").innerText = `${symbol} ${value} = ${formatCurrencyBRL(convertedValue.toFixed(2))}`;
+        footer.classList.add("on");
+    } catch (error) {
+        console.error("Erro ao converter a moeda:", error);
+    }
 }
 
 function formatCurrencyBRL(value) {
-    return Number(value).toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL",
-    })
+
+        return Number(value).toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        });    
 }
