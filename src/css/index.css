@@ -189,6 +189,11 @@ img {
     .container {
         width: fit-content;
     }
+    input,
+    textarea,
+    select {
+    font-size: 16px;
+    } 
 }
 
 footer {
