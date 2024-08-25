@@ -1,52 +1,190 @@
 @charset "UTF-8";
 
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monomaniac+One&display=swap');
 
 :root {
-    --font: "Inter", system-ui, sans-serif;
+    --blue-100: #080815;
+    --blue-200: #0E0F25;
+    --blue-300: #141534;
+    --blue-400: #1F2151;
+    --blue-500: #2F3279;
+    --blue-600: #2F34AB;
+    --blue-700: #4A5DCD;
+    --blue-800: #7D8DEC;
+    --blue-900: #B2B8DE;
+    --white: #F1F2F6;
 
-    --fs-header: 1.2rem;
-    --line-height-header: 2rem;
-    --fw-header: bold;
-
-    --fs-button: .875rem;
-    --line-height-button: 1.125rem;
-    --fw-button: 600;
-
-
-    --fs-body: .875rem;
-    --line-height-body: 1.125rem;
-    --fw-body: 400;
-
-    --fs-label: .625rem;
-    --line-height-label: .875rem;
-    --fw-label: 400;
-
-
+    --font-Inter: "Inter", system-ui, sans-serif;
+    --font-IBM_Plex_Mono: "IBM Plex Mono", system-ui, sans-serif;
+    --font-Monomaniac_One: "Monomaniac One", system-ui, sans-serif;
 }
 
-@media (width < 80em) {
+@media (max-width: 80em) { /* Para telas menores que 1280px */
     :root {
-        --font-header: var(--fw-header) var(--font)/var(--line-height-header);
-        --font-button: var(--fw-button) var(--font)/var(--line-height-button);
-     --font-body: var(--fw-body) var(--font)/var(--line-height-body);
-        --font-label: var(--fw-label) var(--font)/var(--line-height-label);
+        --fs-header: 1.2rem;
+        --line-height-header: 2rem;
+        --fw-header: bold;
+    
+        --fs-button: .875rem;
+        --line-height-button: 1.125rem;
+        --fw-button: 600;
+    
+        --fs-body: .875rem;
+        --line-height-body: 1.125rem;
+        --fw-body: 400;
+    
+        --fs-label: .625rem;
+        --line-height-label: .875rem;
+        --fw-label: 400;
+        
+        --fs-span: .875rem;
+        --line-height-span: 1.125rem;
+        --fw-span: 400;
     }
 }
 
-@media (width >= 80em) {
+@media (min-width: 48em) { /* Para telas maiores ou iguais a 1280px */
     :root {
         --fs-header: 2rem;
         --line-height-header: 3rem;
-    
+        --fw-header: bold;
+
         --fs-button: 1rem;
         --line-height-button: 1.25rem;
-    
+        --fw-button: 600;
+
         --fs-body: 1rem;
         --line-height-body: 1.25rem;
-    
+        --fw-body: 400;
+
         --fs-label: .75rem;
         --line-height-label: 1rem;
+        --fw-label: 400;
+
+        --fs-span: 1rem;
+        --line-height-span: 1.25rem;
+        --fw-span: 400;
     }
 }
 
+h1 {
+    font: var(--fw-header) var(--fs-header)/var(--line-height-header) var(--font-Monomaniac_One);
+}
+
+button {
+    font: var(--fw-button) var(--fs-button)/var(--line-height-button) var(--font-Inter);
+    background-color: var(--blue-600);
+    color: var(--white);
+    max-width: 15.625rem;
+    border-radius: .5rem;
+    width: 22rem;
+    height: 3.25rem;
+    border: 1px solid var(--blue-400);
+    border-radius: .5rem;
+    transition: .3s ease-in;
+    margin-top: 2rem;
+
+    &:hover {
+        background-color: var(--blue-700);
+        cursor: pointer;
+    }
+}
+
+fieldset {
+    border: none;
+    padding: 20px 0;
+}
+
+input[type="text"],
+select {
+    height: 3.25em;
+    max-width: 250px;
+    width: 17.5em;
+    display: block;
+    border-radius: .5rem;
+    width: 352px;
+    height: 52px;
+    background: var(--blue-200);
+    border: 1px solid var(--blue-400);
+    border-radius: .5rem;
+    color: var(--blue-900);
+    caret-color: var(--blue-700);
+    text-align: center;
+
+    &::placeholder {
+        color: var(--blue-900);
+    }
+}
+
+select,input {
+    margin-top: .5rem;
+}
+
+body {
+    font: var(--fw-body) var(--fs-body)/var(--line-height-body) var(--font-Inter);
+    background: url("../assets/img/Background.svg") center;
+    display: grid;
+    align-items: center;
+}
+
+label {
+    font: var(--fw-label) var(--fs-label)/var(--line-height-label) var(--font-Inter);
+    color: var(--blue-900);
+    display: block;
+}
+
+span {
+    font: var(--fw-span) var(--fs-span)/var(--line-height-span) var(--font-IBM_Plex_Mono);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+header {
+    display: flex;
+    align-items: center;
+    color: var(--blue-700);
+    gap: .5rem;
+    justify-content: center;
+
+    & h1 {
+        font-family: var(--font-Monomaniac_One);
+    }
+}
+
+img {
+    width: 3.2rem;
+}
+
+.container {
+    width: 33em;
+    display: grid;
+    text-align: left;
+    justify-content: center;
+    margin: 0 auto;
+    background-color: var(--blue-300);
+    padding: 3.5em 4em;
+    border-radius: 1.5rem;
+    margin-top: 3.125em;
+}
+
+.converter {
+    height: 80vh;
+    display: grid;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3.5em 4em;
+}
+
+@media (max-width: 80em) {
+    .container {
+        width: fit-content;
+    }
+}

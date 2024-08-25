@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONVERT</title>
+    <link rel="stylesheet" href="src/css/index.css" type="text/css">
+</head>
+<body>
+    <main class="converter">
+        <header>
+            <picture>
+                <img src="src/assets/img/ArrowsDownUp.svg" alt="Arrow Down e Arrow Up">
+            </picture>
+            <h1>CONVERT</h1>
+        </header>
+        <div class="container">
+            <form action="">
+                <fieldset>
+                    <label for="value">Valor</label>
+                    <input type="text" name="value" id="value">
+                </fieldset>
+                <fieldset>
+                    <label for="currency">Moeda</label>
+                    <select name="currency" id="currency">
+                        <option value="">Selecione a moeda</option>
+                        <option value="USD">Dólar americano</option>
+                        <option value="EUR">Euro</option>
+                        <option value="GBP">Libra Esterlina</option>
+                        <option value="JPY">Iene japonês</option>
+                        <option value="ARS">Peso argentino</option>
+                        <option value="CNY">Yuan chinês</option>
+                    </select>
+                    </select>
+                </fieldset>
+                <button type="submit">Converter em reais</button>
+            </form>
+            <footer>
+                <span id="description"></span>
+                <h1 id="result"></h1>
+            </footer>
+        </div>
+    </main>
+    <script src="src/js/script.js"></script>
+</body>
+</html>
