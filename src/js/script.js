@@ -1,66 +1,70 @@
-const USD = 4.87;
-const EUR = 5.32;
-const GBP = 6.08;
-const JPY = 0.033;
-const ARS = 0.017;
-const CNY = 0.67;
+
+
 
 const form = document.querySelector("form");
 const value = document.getElementById("value");
 const currency = document.getElementById("currency");
 const footer = document.querySelector("footer");
 
+
+const API_URL = 'https://api.exchangerate-api.com/v4/latest/BRL';
+
+let exchangeRates = {};
+
+// Função para obter taxas de câmbio
+async function fetchExchangeRates() {
+    try {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        exchangeRates = data.rates;
+    } catch (error) {
+        document.getElementById("menssage").innerHTML = "Erro ao buscar taxas de câmbio, tente novamente";
+        console.error("Erro ao buscar taxas de câmbio:", error);
+    } finally {
+    // Verifica se as taxas de câmbio foram carregadas
+    if (Object.keys(exchangeRates).length === 0) {
+        document.getElementById("menssage").innerHTML = "Não foi possível carregar as taxas de câmbio. Tente novamente mais tarde.";
+        return;
+    }
+
+    }
+}
+
 function menssageValid() {
     document.getElementById("menssage").innerHTML = "";
 }
 
 value.addEventListener("input", () => {
-        const regex = /\D+/g;
-        value.value = value.value.replace(regex, "");
-        console.log(value.value);    
+    const regex = /\D+/g;
+    value.value = value.value.replace(regex, "");
+    console.log(value.value);    
 });
 
 form.onsubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-        switch (currency.value) {
-            case "USD":
-                convertCurrency(Number(value.value), USD, "US$");
-                menssageValid()
-                break;
-            case "EUR":
-                convertCurrency(Number(value.value), EUR, "€");
-                menssageValid()
-                break;
-            case "GBP":
-                convertCurrency(Number(value.value), GBP, "£");
-                menssageValid()
-                break;
-            case "JPY":
-                convertCurrency(Number(value.value), JPY, "¥");
-                menssageValid()
-                break;
-            case "ARS":
-                convertCurrency(Number(value.value), ARS, "$");
-                menssageValid()
-                break;
-            case "CNY":
-                convertCurrency(Number(value.value), CNY, "¥");
-                menssageValid()
-                break;
-            default:
-                document.getElementById("menssage").innerHTML = "Selecione uma moeda valida";
-                break;
+    const selectedCurrency = currency.value;
+
+    if (!exchangeRates[selectedCurrency]) {
+        document.getElementById("menssage").innerHTML = "Selecione uma moeda válida";
+        return;
     }
+
+    const rate = exchangeRates[selectedCurrency];
+    const symbol = getCurrencySymbol(selectedCurrency);
+    
+    convertCurrency(Number(value.value), rate, symbol);
+    menssageValid();
 };
 
-function convertCurrency(value, price, symbol) {
+// Função para converter a moeda
+function convertCurrency(value, rate, symbol) {
     try {
-        let convertedValue = value * price;
+        let convertedValue = value * rate;
         convertedValue = formatCurrencyBRL(convertedValue).replace("R$", "");
         console.log(`Valor convertido: ${symbol}${convertedValue}`);
 
-        document.getElementById("description").innerText = `${symbol} 1 = ${formatCurrencyBRL(price)}`;
+        document.getElementById("description").innerText = `${symbol} 1 = ${formatCurrencyBRL(rate)}`;
         document.getElementById("result").innerText = `${convertedValue} Reais`;
 
         footer.classList.add("on");
@@ -69,10 +73,26 @@ function convertCurrency(value, price, symbol) {
     }
 }
 
+// Função para formatar o valor em reais
 function formatCurrencyBRL(value) {
-
-        return Number(value).toLocaleString("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-        });    
+    return Number(value).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+    });
 }
+
+// Função para obter o símbolo da moeda
+function getCurrencySymbol(currencyCode) {
+    switch (currencyCode) {
+        case "USD": return "US$";
+        case "EUR": return "€";
+        case "GBP": return "£";
+        case "JPY": return "¥";
+        case "ARS": return "$";
+        case "CNY": return "¥";
+        default: return "";
+    }
+}
+
+// Inicializa o carregamento das taxas de câmbio
+fetchExchangeRates();
